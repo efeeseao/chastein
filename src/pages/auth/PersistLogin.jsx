@@ -59,8 +59,8 @@ const PersistLogin = () => {
     //persist: yes, token: no
     console.log('error')
     content = (
-      <div className="persist-login">
-        <button type="button" className="persist-button">
+      <div className="container">
+        <button type="button" className="button">
           {`${error.data?.message} - `}
           <Link to="/">Fazer login</Link>
         </button>

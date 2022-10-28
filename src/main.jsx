@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 
-import { Routers } from './routes'
-import { store } from './app/store'
+import { Routers } from '@/routes'
+import { store } from '@/app/store'
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'production') disableReactDevTools()

@@ -106,10 +106,10 @@ const Login = () => {
 
         <button className="submit-form">Entrar</button>
 
-        <label htmlFor="persist" className="persist">
+        <label htmlFor="persist" className="checkbox-container">
           <input
             type="checkbox"
-            className="checkbox"
+            className="form-checkbox"
             id="persist"
             onChange={handleToggle}
             checked={persist}

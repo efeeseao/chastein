@@ -2,8 +2,8 @@ import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import { store } from '@/app/store'
-import { notesApiSlice } from '@/pages/NotesList/notesApiSlice'
-import { usersApiSlice } from '@/pages/UsersList/usersApiSlice'
+import { notesApiSlice } from '@/pages/notes/NotesApiSlice'
+import { usersApiSlice } from '@/pages/users/UsersApiSlice'
 
 const Prefetch = () => {
   useEffect(() => {

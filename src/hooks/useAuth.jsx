@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux'
 import jwtDecode from 'jwt-decode'
 
-import { selectCurrentToken } from '@/pages/Auth/AuthSlice'
+import { selectCurrentToken } from '@/pages/auth/AuthSlice'
 
 export const useAuth = () => {
   const token = useSelector(selectCurrentToken)
-  let isManager = false
-  let isAdmin = false
+  let isManager = 'Manager'
+  let isAdmin = 'Admin'
   let status = 'Doctor (a)'
 
   if (token) {

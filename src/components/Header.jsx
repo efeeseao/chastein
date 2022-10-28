@@ -9,7 +9,7 @@ import {
   faFileCirclePlus
 } from '@fortawesome/free-solid-svg-icons'
 
-import { useSendLogoutMutation } from '@/pages/Auth/AuthApiSlice'
+import { useSendLogoutMutation } from '@/pages/auth/AuthApiSlice'
 import Loading from '@/components/Loading'
 import { useAuth } from '@/hooks/useAuth'
 
