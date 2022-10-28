@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
-import DashFooter from '../DashFooter'
-import DashHeader from '../DashHeader'
+import DashFooter from './Footer'
+import DashHeader from './Header'
 import { useTitle } from '@/hooks/useTitle'
 
 const Dashboard = () => {
