@@ -79,9 +79,5 @@ This software uses these packages:
 - e.g - Branch name is bug/mcw-(number)
 - Once done push your branch to origin and submit a PR to the Develop branch for review 😘
 
-## :memo: License
-
-This project is under the MIT license. See the [LICENSE](https://github.com/vinniciusgomes/idoctor/blob/master/LICENSE) for details.
-
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
