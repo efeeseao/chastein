@@ -54,7 +54,7 @@ export const NewNoteForm = ({ users }) => {
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <section className="notes-form">
+      <section className="section-form">
         <h2>Criar uma nova Nota</h2>
         <form className="form" onSubmit={onSaveNoteClicked}>
           <label className="form-label" htmlFor="title">
@@ -84,7 +84,7 @@ export const NewNoteForm = ({ users }) => {
 
           <div className="form-action">
             <label className="form-label form-checkbox" htmlFor="username">
-              Atribuído a(ao):
+              ATRIBUÍDO A(AO):
             </label>
             <select
               id="username"

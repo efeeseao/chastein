@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 import { useUpdateNoteMutation, useDeleteNoteMutation } from './NotesApiSlice'
 import { useAuth } from '@/hooks/useAuth'
+import { useTitle } from '@/hooks/useTitle'
 
 export const EditNoteForm = ({ note, users }) => {
+  useTitle('Editar Nota')
+
   const { isAdmin, isManager } = useAuth()
   const [updateNote, { isLoading, isSuccess, isError, error }] =
     useUpdateNoteMutation()
@@ -87,11 +88,11 @@ export const EditNoteForm = ({ note, users }) => {
     deleteButton = (
       <button
         type="button"
-        className="icon-button"
-        title="delete"
+        className="delete-button"
+        title="Apagar"
         onClick={onDeleteNoteClicked}
       >
-        <FontAwesomeIcon icon={faTrashCan} />
+        Apagar
       </button>
     )
   }
@@ -100,7 +101,7 @@ export const EditNoteForm = ({ note, users }) => {
     <>
       <p className={errClass}>{errContent}</p>
 
-      <section className="notes-form">
+      <section className="section-form">
         <h2>Editar Nota #{note.ticket}</h2>
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <label className="form-label" htmlFor="note-title">
@@ -127,9 +128,23 @@ export const EditNoteForm = ({ note, users }) => {
             maxLength="25"
             onChange={onTextChanged}
           />
+          <label
+            className="form-label checkbox-container"
+            htmlFor="note-completed"
+          >
+            Trabalho finalizado?:
+            <input
+              className="form-checkbox"
+              id="note-completed"
+              name="completed"
+              type="checkbox"
+              checked={completed}
+              onChange={onCompletedChanged}
+            />
+          </label>
           <div className="form-action">
             <label className="form-label form-checkbox" htmlFor="note-username">
-              Atribuído a (ao):
+              ATRIBUÍDO A (AO):
             </label>
             <select
               id="note-username"
@@ -141,41 +156,27 @@ export const EditNoteForm = ({ note, users }) => {
               {options}
             </select>
           </div>
-          <div className="form-title-row">
-            <label
-              className="form-label form-checkbox"
-              htmlFor="note-completed"
-            >
-              Trabalho finalizado?:
-              <input
-                className="form-checkbox"
-                id="note-completed"
-                name="completed"
-                type="checkbox"
-                checked={completed}
-                onChange={onCompletedChanged}
-              />
-            </label>
-            <div className="form-divider">
-              <p className="form-created">
-                Criado aos
-                <br />
-                {created}
-              </p>
-              <p className="form-updated">
-                Atualizado aos
-                <br />
-                {updated}
-              </p>
-            </div>
-            <div className="form__action-buttons">
+          <div className="form-divider">
+            <p className="form-created">
+              Criado aos
+              <br />
+              {created}
+            </p>
+            <p className="form-updated">
+              Atualizado aos
+              <br />
+              {updated}
+            </p>
+          </div>
+          <div className="form-row">
+            <div className="action-buttons">
               <button
-                className="icon-button"
-                title="Save"
+                className="save-button"
+                title="Salvar"
                 onClick={onSaveNoteClicked}
                 disabled={!canSave}
               >
-                <FontAwesomeIcon icon={faSave} />
+                Salvar
               </button>
               {deleteButton}
             </div>

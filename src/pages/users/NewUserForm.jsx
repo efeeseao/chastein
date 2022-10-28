@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from '@fortawesome/free-solid-svg-icons'
 
 import { useAddNewUserMutation } from './UsersApiSlice'
 import { ROLES } from '@/config/roles'
+import { useTitle } from '@/hooks/useTitle'
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 const EMAIL_REGEX = /^^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 
 const NewUserForm = () => {
+  useTitle('Novo Usuário')
+
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
     useAddNewUserMutation()
 
@@ -79,77 +80,80 @@ const NewUserForm = () => {
   })
 
   const errClass = isError ? 'errmsg' : 'offscreen'
-  const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-  const validEmailClass = !validEmail ? 'form__input--incomplete' : ''
-  const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
-  const validRolesClass = !roles.length ? 'form__input--incomplete' : ''
+  const validUserClass = !validUsername ? 'form-input--incomplete' : ''
+  const validEmailClass = !validEmail ? 'form.input--incomplete' : ''
+  const validPwdClass = !validPassword ? 'form-input--incomplete' : ''
+  const validRolesClass = !roles.length ? 'form-input--incomplete' : ''
 
   return (
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <form className="form" onSubmit={onSaveUserClicked}>
-        <div className="form__title-row">
-          <h2>New User</h2>
-          <div className="form__action-buttons">
-            <button className="icon-button" title="Save" disabled={!canSave}>
-              <FontAwesomeIcon icon={faSave} />
-            </button>
+      <section className="section-form">
+        <h2>Adicionar novo Usuário</h2>
+        <form className="form" onSubmit={onSaveUserClicked}>
+          <label className="form-label" htmlFor="username">
+            Username
+          </label>
+          <input
+            className={`form-input ${validUserClass}`}
+            id="username"
+            name="username"
+            type="text"
+            autoComplete="off"
+            placeholder="Username"
+            value={username}
+            onChange={onUsernameChanged}
+          />
+
+          <label className="form-label" htmlFor="email">
+            Email
+          </label>
+          <input
+            className={`form-input ${validEmailClass}`}
+            id="email"
+            name="email"
+            type="text"
+            autoComplete="off"
+            placeholder="email"
+            value={email}
+            onChange={onEmailChanged}
+          />
+
+          <label className="form-label" htmlFor="password">
+            Senha
+          </label>
+          <input
+            className={`form-input ${validPwdClass}`}
+            id="password"
+            name="password"
+            type="password"
+            value={password}
+            placeholder="Senha"
+            onChange={onPasswordChanged}
+          />
+
+          <div className="form-action">
+            <label className="form-label" htmlFor="roles">
+              FUNÇÃO:
+            </label>
+            <select
+              id="roles"
+              name="roles"
+              className={`form-select ${validRolesClass}`}
+              multiple={true}
+              size="3"
+              value={roles}
+              onChange={onRolesChanged}
+            >
+              {options}
+            </select>
           </div>
-        </div>
-        <label className="form__label" htmlFor="username">
-          Username
-        </label>
-        <input
-          className={`form__input ${validUserClass}`}
-          id="username"
-          name="username"
-          type="text"
-          autoComplete="off"
-          value={username}
-          onChange={onUsernameChanged}
-        />
-
-        <label className="form__label" htmlFor="email">
-          Email
-        </label>
-        <input
-          className={`form__input ${validEmailClass}`}
-          id="email"
-          name="email"
-          type="text"
-          autoComplete="off"
-          value={email}
-          onChange={onEmailChanged}
-        />
-
-        <label className="form__label" htmlFor="password">
-          Senha
-        </label>
-        <input
-          className={`form__input ${validPwdClass}`}
-          id="password"
-          name="password"
-          type="password"
-          value={password}
-          onChange={onPasswordChanged}
-        />
-
-        <label className="form__label" htmlFor="roles">
-          ASSIGNED ROLES:
-        </label>
-        <select
-          id="roles"
-          name="roles"
-          className={`form__select ${validRolesClass}`}
-          multiple={true}
-          size="3"
-          value={roles}
-          onChange={onRolesChanged}
-        >
-          {options}
-        </select>
-      </form>
+          <button className="save-button" title="Save" disabled={!canSave}>
+            Salvar
+          </button>
+        </form>
+      </section>
     </>
   )
 }
