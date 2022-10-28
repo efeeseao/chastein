@@ -7,11 +7,10 @@
 /* || VARIABLES */
 
 :root {
-  /* COLORS */
   --BGCOLOR: #0F172A;
   --BORDER-COLOR: #FFF;
   --COLOR: #FFF;
-  --ERROR: firebrick;
+  --ERROR: #E52E40;
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
   --LINK-HOVER: rgba(245, 245, 245, 0.9);
@@ -22,6 +21,7 @@
   --TABLE-COLOR: #000;
   --INPUT-INVALID: #F00;
   --BACKGROUND: #F0F2F5;
+  --GREEN: #33CC95;
 }
 
 /* || UTILITY CLASSES */
@@ -34,43 +34,13 @@
   color: var(--ERROR);
   padding: 0.25em;
   margin-bottom: 0.5em;
+
+  a {
+    color: var(--ERROR);
+    text-decoration: underline;
+  }
 }
 
-.errmsg a:any-link {
-  color: var(--ERROR);
-  text-decoration: underline;
-}
-
-.nowrap {
-  white-space: nowrap;
-}
-
-.icon-button {
-  width: 48px;
-  height: 48px;
-  font-size: 2.5rem;
-  background-color: transparent;
-  border: none;
-  color: var(--BGCOLOR);
-  display: grid;
-  place-content: center;
-}
-
-.icon-button:hover,
-.icon-button:focus-visible {
-  transform: scale(1.2);
-}
-
-.icon-button[disabled] {
-  visibility: hidden;
-}
-
-.isLoading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
 /* || GENERAL STYLES */
 
 body {
@@ -95,17 +65,81 @@ select {
 
 a {
   text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--LINK-HOVER);
+  }
 }
 
-a:any-link {
-  color: var(--LINK-COLOR);
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-a:hover,
-a:focus-visible {
-  color: var(--LINK-HOVER);
+.save-button,
+.delete-button,
+.button {
+  width: 100%;
+  padding: 0 1.5rem;
+  height: 3rem;
+  background: var(--GREEN);
+  color: var(--COLOR);
+  border-radius: 0.25rem;
+  border: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.15rem;
+  cursor: pointer;
+
+  &:disabled {
+    visibility: hidden;
+  }
 }
 
+.button {
+  background: #5429CC;
+}
+
+.delete-button {
+  background: var(--ERROR);
+}
+
+.icon-button {
+  width: 38px;
+  height: 38px;
+  font-size: 2.5rem;
+  background-color: transparent;
+  border: none;
+  color: #363F5F;
+  display: grid;
+  place-content: center;
+}
+
+.isLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 100%;
+  gap: 0.5em;
+  margin-top: 1rem;
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 0.5em;
+  }
+}
 /* || Welcome */
 .welcome {
   display: flex;
@@ -126,24 +160,6 @@ a:focus-visible {
       color: #363F5F;
       font-size: large;
     }
-  }
-}
-
-/* || PERSIST LOGIN */
-.persist-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-
-  .persist-button {
-    background: #5429CC;
-    padding: 0 1.5rem;
-    height: 4rem;
-    border-radius: 0.25rem;
-    border: 0;
-    font-size: 1.3rem;
-    color: #FFFFFF;
   }
 }
 
@@ -223,8 +239,9 @@ a:focus-visible {
   }
 }
 
-/* || NOTES */
-.notes-form {
+/* || FORM IN GENERAL */
+
+.section-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,7 +256,7 @@ a:focus-visible {
 }
 
 .form {
-  max-width: 340px;
+  max-width: 380px;
 
   label {
     font-size: 1.2rem;
@@ -264,29 +281,15 @@ a:focus-visible {
     }
   }
 
-  .save-button {
-    width: 100%;
-    padding: 0 1.5rem;
-    height: 3rem;
-    background: #33CC95;
-    color: #fff;
-    border-radius: 0.25rem;
-    border: 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 1.15rem;
-
-    transition: filter 0.2s;
-
-    &:hover {
-      filter: brightness(0.9);
-    }
-  }
-
-
   .textarea {
     height: 90px;
   }
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
 }
 
 .form-action {
@@ -298,18 +301,26 @@ a:focus-visible {
     width: 60%;
     padding: 0 1.5rem;
     height: 3rem;
-    background: #6933ff;
-    color: #fff;
+    color: #363f5f;
     border-radius: 0.25rem;
     border: 0;
     font-size: 1rem;
     font-weight: 600;
     margin-top: 0.4rem;
+    text-align: center;
   }
 
   .form-label {
-    margin-top: 1rem;
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
   }
+}
+
+.form-divider {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 /* || LOGIN  */
@@ -328,7 +339,7 @@ a:focus-visible {
 
   .errormsg {
     display: inline-block;
-    color: #E52E40;
+    color: var(--ERROR);
     padding: 0.25em;
     margin-bottom: 0.5em;
   }
@@ -380,22 +391,6 @@ a:focus-visible {
 
     &:hover {
       filter: brightness(0.9);
-    }
-  }
-
-  .persist {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    width: 100%;
-    gap: 0.5em;
-    margin-top: 1rem;
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      width: fit-content;
-      gap: 0.5em;
     }
   }
 }
